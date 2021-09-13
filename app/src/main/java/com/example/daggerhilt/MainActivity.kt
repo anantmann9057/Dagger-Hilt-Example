@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any
     fun onItemClick(view: View?, position: Int, `object`: Any) {
         when (`object`) {
             is Cannabis -> {
-                startActivity(Intent(this,PlaceHolderActivity::class.java))
+                startActivity(Intent(this,RestaurantActivity::class.java))
             }
         }
     }

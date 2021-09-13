@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.daggerhilt.data.PlaceHolder" />
+            type="com.example.daggerhilt.data.Restaurant" />
 
         <variable
             name="itemClickListener"
@@ -25,17 +25,32 @@
         app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true">
 
-        <ImageView
-            android:id="@+id/imgPlaceholder"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:src="@{model.image}" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvPlaceholder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{model.imageGif}" />
+            <ImageView
+                android:id="@+id/imgPlaceholder"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layout_constraintBottom_toTopOf="@id/tvPlaceholder"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:src="@{model.logo}" />
+
+            <TextView
+                android:id="@+id/tvPlaceholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@{model.name}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgPlaceholder" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
 </layout>
