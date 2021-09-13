@@ -19,18 +19,15 @@ class CannabisViewModel @Inject constructor(private val cannabisApi: CannabisApi
 
     fun fetchCannabisBySize(size: Int) {
         viewModelScope.launch {
-            val cannabisAmount = cannabisApi.getCannabisWithSize(size)
-            cannabisBySizeLiveData.value = cannabisAmount
+            cannabisBySizeLiveData.value = cannabisApi.getCannabisWithSize(size)
         }
     }
 
-    fun fetchCannabisData(){
+    fun fetchCannabisData() {
         viewModelScope.launch {
-            val cannabis = cannabisApi.getCannabis()
-            cannabisLiveData.value = cannabis
+            cannabisLiveData.value = cannabisApi.getCannabis()
         }
     }
-
 
 
 }
