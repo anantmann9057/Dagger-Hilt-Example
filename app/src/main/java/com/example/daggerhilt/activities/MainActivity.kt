@@ -1,4 +1,4 @@
-package com.example.daggerhilt
+package com.example.daggerhilt.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,10 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.daggerhilt.R
 import com.example.daggerhilt.data.Cannabis
 import com.example.daggerhilt.databinding.ActivityMainBinding
+import com.example.daggerhilt.showToast
 import com.example.daggerhilt.viewModel.CannabisViewModel
 import com.example.daggerhilt.viewModel.PlaceHolderViewModel
 import com.hunger.worries.adapters.GenericAdapter
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any
         }
     }
 
-    fun fetchCannabisBySize(size: Int) {
+    private fun fetchCannabisBySize(size: Int) {
         viewModel.fetchCannabisBySize(size)
         viewModel.cannabisAmount.observe(this) {
             cannabisList = it
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any
         }
     }
 
-    fun fetchCannabis() {
+    private fun fetchCannabis() {
         viewModel.fetchCannabisData()
         viewModel.cannabis.observe(this) {
             cannabisList = it
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any
         }
     }
 
-    fun setCannabisAdapter() {
+    private fun setCannabisAdapter() {
         cannabisList = ArrayList()
 
         cannabisAdapter =
@@ -73,7 +75,7 @@ class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any
     fun onItemClick(view: View?, position: Int, `object`: Any) {
         when (`object`) {
             is Cannabis -> {
-                startActivity(Intent(this,RestaurantActivity::class.java))
+                startActivity(Intent(this, RestaurantActivity::class.java))
             }
         }
     }

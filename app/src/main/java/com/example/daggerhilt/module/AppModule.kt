@@ -1,5 +1,7 @@
-package com.example.daggerhilt
+package com.example.daggerhilt.module
 
+import android.app.Application
+import androidx.room.Room
 import com.example.daggerhilt.apiService.CannabisApi
 import dagger.Module
 import dagger.Provides
@@ -40,5 +42,5 @@ class AppModule {
     fun provideCannabisApi(retrofit: Retrofit): CannabisApi = providesRetrofit()
         .create(CannabisApi::class.java)
 
-
+   
 }

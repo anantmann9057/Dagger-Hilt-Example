@@ -1,13 +1,14 @@
-package com.example.daggerhilt
+package com.example.daggerhilt.activities
 
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.daggerhilt.R
 import com.example.daggerhilt.data.Restaurant
-import com.example.daggerhilt.databinding.ActivityPlaceHolderBinding
 import com.example.daggerhilt.databinding.ActivityRestaurantBinding
+import com.example.daggerhilt.showToast
 import com.example.daggerhilt.viewModel.PlaceHolderViewModel
 import com.hunger.worries.adapters.GenericAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,15 +29,15 @@ class RestaurantActivity : AppCompatActivity(), GenericAdapter.OnItemClickListen
         fetchPlaceHolder()
     }
 
-    fun fetchPlaceHolder() {
+    private fun fetchPlaceHolder() {
         viewModel.getRestaurant()
         viewModel.restaurant.observe(this) {
-            showToast(it)
             setRestaurantAdapter(it)
+
         }
     }
 
-    fun setRestaurantAdapter(restaurantList: ArrayList<Restaurant>) {
+    private fun setRestaurantAdapter(restaurantList: ArrayList<Restaurant>) {
         restaurantAdapter = GenericAdapter(
             restaurantList as java.util.ArrayList<Any>,
             this,

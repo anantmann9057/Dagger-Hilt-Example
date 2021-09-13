@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.daggerhilt.apiService.CannabisApi
 import com.example.daggerhilt.data.PlaceHolder
 import com.example.daggerhilt.data.Restaurant
+import com.example.daggerhilt.util.NetworkBoundResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,7 +27,7 @@ class PlaceHolderViewModel @Inject constructor(private val cannabisApi: Cannabis
         }
     }
 
-    fun getRestaurant(){
+    fun getRestaurant() {
         viewModelScope.launch {
             restaurantLiveData.value = cannabisApi.getRestaurant()
         }
