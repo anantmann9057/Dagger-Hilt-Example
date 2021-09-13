@@ -5,45 +5,61 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.daggerhilt.data.Cannabis
 import com.example.daggerhilt.databinding.ActivityMainBinding
 import com.example.daggerhilt.viewModel.CannabisViewModel
 import com.hunger.worries.adapters.GenericAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any> {
-    lateinit var homeAdapter: GenericAdapter
+    lateinit var cannabisAdapter: GenericAdapter
     val viewModel: CannabisViewModel by viewModels()
-
+    lateinit var binding: ActivityMainBinding
+    lateinit var cannabisList: ArrayList<Cannabis>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.fetchCannabisData()
-        viewModel.cannabis.observe(this) {
+        cannabisList = ArrayList()
 
-            homeAdapter = GenericAdapter(it as ArrayList<Any>, this, R.layout.row_base)
-            binding.rvHome.apply {
-                layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = homeAdapter
-            }
-        }
+        setCannabisAdapter()
+        fetchCannabis()
 
         binding.btFetch.setOnClickListener {
-            viewModel.fetchCannabis(100)
-            viewModel.cannabisAmount.observe(this) {
-                homeAdapter = GenericAdapter(it as ArrayList<Any>, this, R.layout.row_base)
-                binding.rvHome.apply {
-                    layoutManager = LinearLayoutManager(this@MainActivity)
-                    adapter = homeAdapter
-                }
-                homeAdapter.notifyAdapter(it as ArrayList<Any>)
-            }
+            fetchCannabisBySize(100)
         }
     }
 
-    override fun onItemClick(view: View?, position: Int, `object`: Any) {
+    fun fetchCannabisBySize(size: Int) {
+        viewModel.fetchCannabisBySize(size)
+        viewModel.cannabisAmount.observe(this) {
+            cannabisList = it
+            cannabisAdapter.notifyAdapter(cannabisList as java.util.ArrayList<Any>)
+        }
+    }
+
+    fun fetchCannabis() {
+        viewModel.fetchCannabisData()
+        viewModel.cannabis.observe(this) {
+            cannabisList = it
+            cannabisAdapter.notifyAdapter(cannabisList as java.util.ArrayList<Any>)
+        }
+    }
+
+    fun setCannabisAdapter() {
+        cannabisAdapter =
+            GenericAdapter(cannabisList as ArrayList<Any>, this, R.layout.row_base)
+        binding.rvHome.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = cannabisAdapter
+        }
+    }
+
+    override
+    fun onItemClick(view: View?, position: Int, `object`: Any) {
     }
 }

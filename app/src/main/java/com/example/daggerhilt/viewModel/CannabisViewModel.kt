@@ -14,13 +14,13 @@ import javax.inject.Inject
 class CannabisViewModel @Inject constructor(private val cannabisApi: CannabisApi) : ViewModel() {
     private val cannabisLiveData = MutableLiveData<ArrayList<Cannabis>>()
     val cannabis: LiveData<ArrayList<Cannabis>> = cannabisLiveData
-    private val cannabisAmountLiveData = MutableLiveData<ArrayList<Cannabis>>()
-    val cannabisAmount: LiveData<ArrayList<Cannabis>> = cannabisAmountLiveData
+    private val cannabisBySizeLiveData = MutableLiveData<ArrayList<Cannabis>>()
+    val cannabisAmount: LiveData<ArrayList<Cannabis>> = cannabisBySizeLiveData
 
-    fun fetchCannabis(size: Int) {
+    fun fetchCannabisBySize(size: Int) {
         viewModelScope.launch {
             val cannabisAmount = cannabisApi.getCannabisWithSize(size)
-            cannabisAmountLiveData.value = cannabisAmount
+            cannabisBySizeLiveData.value = cannabisAmount
         }
     }
 
