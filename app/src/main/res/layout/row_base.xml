@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.example.daggerhilt.data.Cannabis" />
+
+        <variable
+            name="itemClickListener"
+            type="com.hunger.worries.adapters.GenericAdapter.OnItemClickListener" />
+
+        <variable
+            name="index"
+            type="Integer" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view)-> itemClickListener.onItemClick(view,index,model)}"
+            android:text="@{model.type}"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view)-> itemClickListener.onItemClick(view,index,model)}"
+            android:text="@{model.health_benefit}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view)-> itemClickListener.onItemClick(view,index,model)}"
+            android:text="@{model.medicalUse}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view)-> itemClickListener.onItemClick(view,index,model)}"
+            android:text="@{model.category}" />
+    </LinearLayout>
+
+
+</layout>
