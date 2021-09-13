@@ -8,14 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.daggerhilt.R
 import com.example.daggerhilt.data.Restaurant
 import com.example.daggerhilt.databinding.ActivityRestaurantBinding
-import com.example.daggerhilt.showToast
-import com.example.daggerhilt.viewModel.PlaceHolderViewModel
+import com.example.daggerhilt.viewModel.ViewModel
 import com.hunger.worries.adapters.GenericAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RestaurantActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any> {
-    private val viewModel: PlaceHolderViewModel by viewModels()
+    private val mViewModel: ViewModel by viewModels()
 
     private lateinit var binding: ActivityRestaurantBinding
     private lateinit var restaurantAdapter: GenericAdapter
@@ -30,8 +29,8 @@ class RestaurantActivity : AppCompatActivity(), GenericAdapter.OnItemClickListen
     }
 
     private fun fetchPlaceHolder() {
-        viewModel.getRestaurant()
-        viewModel.restaurant.observe(this) {
+        mViewModel.getRestaurant()
+        mViewModel.restaurant.observe(this) {
             setRestaurantAdapter(it)
 
         }

@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.daggerhilt.R
 import com.example.daggerhilt.data.Cannabis
 import com.example.daggerhilt.databinding.ActivityMainBinding
-import com.example.daggerhilt.showToast
-import com.example.daggerhilt.viewModel.CannabisViewModel
-import com.example.daggerhilt.viewModel.PlaceHolderViewModel
+import com.example.daggerhilt.viewModel.ViewModel
 import com.hunger.worries.adapters.GenericAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -21,8 +19,7 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any> {
     lateinit var cannabisAdapter: GenericAdapter
 
-    private val viewModel: CannabisViewModel by viewModels()
-    private val placeholderViewModel: PlaceHolderViewModel by viewModels()
+    private val mViewModel: ViewModel by viewModels()
 
     lateinit var binding: ActivityMainBinding
     lateinit var cannabisList: ArrayList<Cannabis>
@@ -41,20 +38,17 @@ class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any
     }
 
     private fun fetchCannabisBySize(size: Int) {
-        viewModel.fetchCannabisBySize(size)
-        viewModel.cannabisAmount.observe(this) {
+        mViewModel.fetchCannabisBySize(size)
+        mViewModel.cannabisAmount.observe(this) {
             cannabisList = it
             cannabisAdapter.notifyAdapter(cannabisList as java.util.ArrayList<Any>)
         }
-        placeholderViewModel.getPlaceHolder()
-        placeholderViewModel.placeholder.observe(this) {
-            showToast(it)
-        }
+
     }
 
     private fun fetchCannabis() {
-        viewModel.fetchCannabisData()
-        viewModel.cannabis.observe(this) {
+        mViewModel.fetchCannabisData()
+        mViewModel.cannabis.observe(this) {
             cannabisList = it
             cannabisAdapter.notifyAdapter(cannabisList as java.util.ArrayList<Any>)
         }

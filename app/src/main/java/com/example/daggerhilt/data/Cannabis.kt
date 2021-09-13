@@ -1,9 +1,5 @@
 package com.example.daggerhilt.data
 
-import androidx.annotation.NonNull
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
 data class Cannabis(
 
     val strain: String? = null,

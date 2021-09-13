@@ -1,8 +1,6 @@
 package com.example.daggerhilt.module
 
-import android.app.Application
-import androidx.room.Room
-import com.example.daggerhilt.apiService.CannabisApi
+import com.example.daggerhilt.apiService.ApiInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,15 +30,15 @@ class AppModule {
     @Provides
     @Singleton
     fun providesRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl(CannabisApi.BASE_URL)
+        .baseUrl(ApiInterface.BASE_URL)
         .client(OkHttpClient())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     @Provides
     @Singleton
-    fun provideCannabisApi(retrofit: Retrofit): CannabisApi = providesRetrofit()
-        .create(CannabisApi::class.java)
+    fun provideCannabisApi(retrofit: Retrofit): ApiInterface = providesRetrofit()
+        .create(ApiInterface::class.java)
 
-   
+
 }

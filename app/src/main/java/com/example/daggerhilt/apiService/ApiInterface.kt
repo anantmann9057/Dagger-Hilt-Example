@@ -6,7 +6,7 @@ import com.example.daggerhilt.data.Restaurant
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface CannabisApi {
+interface ApiInterface {
     companion object {
         const val BASE_URL = "https://random-data-api.com/api/"
     }
