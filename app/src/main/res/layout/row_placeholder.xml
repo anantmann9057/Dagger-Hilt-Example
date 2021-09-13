@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.example.daggerhilt.data.PlaceHolder" />
+
+        <variable
+            name="itemClickListener"
+            type="com.hunger.worries.adapters.GenericAdapter.OnItemClickListener" />
+
+        <variable
+            name="index"
+            type="Integer" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/imgPlaceholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:src="@{model.image}" />
+
+        <TextView
+            android:id="@+id/tvPlaceholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{model.imageGif}" />
+    </androidx.cardview.widget.CardView>
+
+</layout>

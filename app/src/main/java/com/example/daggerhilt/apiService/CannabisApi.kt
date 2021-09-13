@@ -1,6 +1,7 @@
 package com.example.daggerhilt.apiService
 
 import com.example.daggerhilt.data.Cannabis
+import com.example.daggerhilt.data.PlaceHolder
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -15,4 +16,6 @@ interface CannabisApi {
     @GET("cannabis/random_cannabis")
     suspend fun getCannabisWithSize(@Query("size") size: Int): ArrayList<Cannabis>
 
+    @GET("placeholdit/random_placeholdit?size=30")
+    suspend fun getPlaceHolder(): ArrayList<PlaceHolder>
 }
