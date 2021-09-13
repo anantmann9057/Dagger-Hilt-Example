@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.daggerhilt.data.Restaurant
 import com.example.daggerhilt.databinding.ActivityPlaceHolderBinding
+import com.example.daggerhilt.databinding.ActivityRestaurantBinding
 import com.example.daggerhilt.viewModel.PlaceHolderViewModel
 import com.hunger.worries.adapters.GenericAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,13 +16,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class RestaurantActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any> {
     private val viewModel: PlaceHolderViewModel by viewModels()
 
-    private lateinit var binding: ActivityPlaceHolderBinding
+    private lateinit var binding: ActivityRestaurantBinding
     private lateinit var restaurantAdapter: GenericAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityPlaceHolderBinding.inflate(layoutInflater)
+        binding = ActivityRestaurantBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         fetchPlaceHolder()
