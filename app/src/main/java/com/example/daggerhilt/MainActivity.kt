@@ -15,17 +15,31 @@ import java.util.*
 class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any> {
     lateinit var homeAdapter: GenericAdapter
     val viewModel: CannabisViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel.fetchCannabisData()
         viewModel.cannabis.observe(this) {
 
             homeAdapter = GenericAdapter(it as ArrayList<Any>, this, R.layout.row_base)
             binding.rvHome.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
                 adapter = homeAdapter
+            }
+        }
+
+        binding.btFetch.setOnClickListener {
+            viewModel.fetchCannabis(100)
+            viewModel.cannabisAmount.observe(this) {
+                homeAdapter = GenericAdapter(it as ArrayList<Any>, this, R.layout.row_base)
+                binding.rvHome.apply {
+                    layoutManager = LinearLayoutManager(this@MainActivity)
+                    adapter = homeAdapter
+                }
+                homeAdapter.notifyAdapter(it as ArrayList<Any>)
             }
         }
     }

@@ -11,15 +11,26 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CannabisViewModel @Inject constructor(cannabisApi: CannabisApi) : ViewModel() {
+class CannabisViewModel @Inject constructor(private val cannabisApi: CannabisApi) : ViewModel() {
     private val cannabisLiveData = MutableLiveData<ArrayList<Cannabis>>()
     val cannabis: LiveData<ArrayList<Cannabis>> = cannabisLiveData
+    private val cannabisAmountLiveData = MutableLiveData<ArrayList<Cannabis>>()
+    val cannabisAmount: LiveData<ArrayList<Cannabis>> = cannabisAmountLiveData
 
-    init {
+    fun fetchCannabis(size: Int) {
         viewModelScope.launch {
-            val cannabis = cannabisApi.getCannabisWithSize(50)
+            val cannabisAmount = cannabisApi.getCannabisWithSize(size)
+            cannabisAmountLiveData.value = cannabisAmount
+        }
+    }
 
+    fun fetchCannabisData(){
+        viewModelScope.launch {
+            val cannabis = cannabisApi.getCannabis()
             cannabisLiveData.value = cannabis
         }
     }
+
+
+
 }
