@@ -1,2 +1,5 @@
 rootProject.name = "DaggerHIlt"
 include ':app'
+include ':Hilt'
+include ':app:daggerHilt'
+include ':daggerHilt'

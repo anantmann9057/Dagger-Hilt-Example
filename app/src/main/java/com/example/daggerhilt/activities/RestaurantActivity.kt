@@ -8,14 +8,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.daggerhilt.R
 import com.example.daggerhilt.data.Restaurant
 import com.example.daggerhilt.databinding.ActivityRestaurantBinding
+import com.example.daggerhilt.module.SampleMethods
+import com.example.daggerhilt.viewModel.AnotherViewModel
 import com.example.daggerhilt.viewModel.ViewModel
 import com.hunger.worries.adapters.GenericAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RestaurantActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any> {
-    private val mViewModel: ViewModel by viewModels()
+    @Inject
+    lateinit var sampleMethods: SampleMethods
 
+    private val mViewModel: ViewModel by viewModels()
+    private val anotherViewModel: AnotherViewModel by viewModels()
     private lateinit var binding: ActivityRestaurantBinding
     private lateinit var restaurantAdapter: GenericAdapter
 
@@ -24,13 +30,13 @@ class RestaurantActivity : AppCompatActivity(), GenericAdapter.OnItemClickListen
 
         binding = ActivityRestaurantBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        sampleMethods.showToast(this, "this is injected")
         fetchPlaceHolder()
     }
 
     private fun fetchPlaceHolder() {
-        mViewModel.getRestaurant()
-        mViewModel.restaurant.observe(this) {
+        anotherViewModel.getRestaurant()
+        anotherViewModel.restaurant.observe(this) {
             setRestaurantAdapter(it)
 
         }

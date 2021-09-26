@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.daggerhilt.R
 import com.example.daggerhilt.data.Cannabis
 import com.example.daggerhilt.databinding.ActivityMainBinding
+import com.example.daggerhilt.showToast
+import com.example.daggerhilt.viewModel.AnotherViewModel
 import com.example.daggerhilt.viewModel.ViewModel
 import com.hunger.worries.adapters.GenericAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,13 +23,14 @@ class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any
 
     private val mViewModel: ViewModel by viewModels()
 
+    private val anotherViewModel: AnotherViewModel by viewModels()
+
     lateinit var binding: ActivityMainBinding
     lateinit var cannabisList: ArrayList<Cannabis>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         setCannabisAdapter()
         fetchCannabis()
@@ -38,8 +41,8 @@ class MainActivity : AppCompatActivity(), GenericAdapter.OnItemClickListener<Any
     }
 
     private fun fetchCannabisBySize(size: Int) {
-        mViewModel.fetchCannabisBySize(size)
-        mViewModel.cannabisAmount.observe(this) {
+        anotherViewModel.fetchCannabisBySize(size)
+        anotherViewModel.cannabisAmount.observe(this) {
             cannabisList = it
             cannabisAdapter.notifyAdapter(cannabisList as java.util.ArrayList<Any>)
         }
