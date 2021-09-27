@@ -10,10 +10,11 @@ import com.example.daggerhilt.data.Restaurant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class ViewModel @Inject constructor(
-    private val apiInterface: ApiInterface,
+    @Inject @Named("ApiService") var apiInterface: ApiInterface
 ) : ViewModel() {
     private val cannabisLiveData = MutableLiveData<ArrayList<Cannabis>>()
     val cannabis: LiveData<ArrayList<Cannabis>> = cannabisLiveData

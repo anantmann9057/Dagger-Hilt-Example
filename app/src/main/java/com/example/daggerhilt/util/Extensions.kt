@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 
+var AUTH_TOKEN=""
+
 fun Context.showToast(mssg: Any) {
     Toast.makeText(this, "$mssg", Toast.LENGTH_SHORT).show()
 }
